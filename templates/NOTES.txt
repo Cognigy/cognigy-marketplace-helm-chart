@@ -1,0 +1,44 @@
+CHART NAME: {{ .Chart.Name }}
+CHART VERSION: {{ .Chart.Version }}
+APP VERSION: {{ .Chart.AppVersion }}
+
+Cognigy.AI Marketplace has been deployed.
+
+{{- if .Values.ingress.enabled }}
+
+You can check status of the application by accessing the below link in your web-browser:
+https://{{ .Values.ingress.marketplace.host }}
+
+You can also check from Terminal using 'cURL' utility:
+$ curl -s https://{{ .Values.ingress.marketplace.host }}
+
+Get HTTP status code only (expected: HTTP/2 200):
+$ curl -I https://{{ .Values.ingress.marketplace.host }}
+
+Example output in browser
+=========================
+
+{
+  "_links": {
+    "self": {
+      "href": "https://{{ .Values.ingress.marketplace.host }}/"
+    },
+    "OpenAPI Viewer": {
+      "href": "https://{{ .Values.ingress.marketplace.host }}/openapi"
+    },
+    "OpenAPI definitionfile": {
+      "href": "https://{{ .Values.ingress.marketplace.host }}/openapi/openapi.json"
+    }
+  },
+  "message": "Welcome to the MARKETPLACE API.",
+  "version": "1.0.0"
+}
+{{- end }}
+
+Check Kubernetes resources
+==========================
+$ kubectl get all -n {{ $.Release.Namespace }}
+
+Expect to see {{ .Values.replicaCount }} pod(s) in 'Running' state
+controlled by a deployment. There should also be a service for the
+deployment.

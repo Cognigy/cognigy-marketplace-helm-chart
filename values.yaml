@@ -1,0 +1,151 @@
+# Copyright Cognigy GmbH. All Rights Reserved.
+
+## Default values for cognigy-marketplace.
+## This is a YAML-formatted file.
+## Declare variables to be passed into your templates.
+
+## State the replication count for Marketplace deployment
+##
+replicaCount: 3
+## Image: State the parameters for pulling image for Marketplace.
+## Specify the repository FQDN, repository name and image tag.
+## repository: example.com/my-repository-name
+## tag: specify image tag within quotes
+## imagePullSecret: speicify the secret containing credentials to connect
+## to image registry
+##
+image:
+  repository: cognigy.azurecr.io/marketplace-server-backend
+  tag: "148237"
+  pullPolicy: IfNotPresent
+  imagePullSecret: cognigy-registry-token
+
+## nameOverride String to partially override cognigy-marketplace.fullname
+##
+nameOverride: ""
+## fullnameOverride: String to fully override cognigy-marketplace.fullname
+##
+fullnameOverride: ""
+## Configure Pods Security Context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+##
+podSecurityContext: {}
+## Configure Container Security Context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+##
+securityContext: {}
+## nodeSelector: Node labels for pod assignment
+## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
+##
+nodeSelector: {}
+## Tolerations for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+## affinity: Set affinity for workloads
+## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity
+affinity: {}
+## Specify the configmap data for Marketplace
+##
+## Specify Pod Priority Class Name, if applicable.
+## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority
+##
+priorityClassName: ""
+configmap:
+  ## Mandatory DNS name for the marketplace, see ingress
+  MARKETPLACE_BASE_URL_WITH_PROTOCOL: "http://marketplace"
+
+  ## Optional overrides, you should know what you do
+
+  ## Changes the port on which the application listens, changes in
+  ## service + ingress required.
+  # HTTP_PORT: "8000"
+
+  ## Whether to enable instana monitoring
+  # FEATURE_INSTANA_MONITORING: "true"
+
+  ## Whitelist of CORS origions, defaults to '*'
+  # MARKETPLACE_CORS_WHITELIST: ""
+
+  ## Limitation for JSON payloads, default 100kb
+  # HTTP_JSON_BODY_LIMIT: ""
+
+  ## Limitation for text payloads, default 2MB
+  # HTTP_TEXT_BODY_LIMIT: ""
+
+## Kubernetes service type and other configurations
+##
+service:
+  type: ClusterIP
+  port: 8000
+  annotations: {}
+## ingress: If ingress is not required to deploy then you can set
+## "ingress.enabled" to 'false'. By default, it is always enabled.
+##
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  marketplace:
+    host: marketplace
+    annotations: {}
+    ipWhiteListMiddleware:
+      enabled: true
+      ipWhiteList:
+        sourceRange:
+          - 0.0.0.0/0
+        ipStrategy:
+          depth: 0
+  tls:
+    enabled: true
+    ## Add Custom CA certificate. A tls type secret named "cognigy-traefik"
+    ## will be created based on the values of tls.crt and tls.key
+    ## Be careful with the indentation.
+    ## For more information, see https://helm.sh/docs/chart_template_guide/yaml_techniques/#strings-in-yaml
+    ##
+    ## Custom CA certificate in plaintext, not base64 encoded.
+    ## Example:
+    ##   crt: |
+    ##     -----BEGIN CERTIFICATE-----
+    ##     -----END CERTIFICATE-----
+    crt: ""
+    ## CA certificate private key in plaintext, not base64 encoded.
+    ## Example:
+    ## key: |
+    ##   -----BEGIN PRIVATE KEY-----
+    ##   -----END PRIVATE KEY-----
+    key: ""
+    ## Existing secret with TLS certificates. The secret must have the following two keys:
+    ## "tls.crt": Containing the CA certificate
+    ## "tls.key": Containing the certificate key
+    ## NOTE: When tls.existingSecret is set, clear text certificate passed in
+    ## the previous parameters "tls.crt" and "tls.key" are ignored.
+    existingSecret: "cognigy-traefik"
+## resources: Set container requests and limits for different resources like CPU or memory (essential for production workloads)
+## ref: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits
+##
+resources:
+  requests:
+    cpu: 200m
+    memory: 200M
+  limits:
+    cpu: 400m
+    memory: 300M
+## Liveness probes determine when to restart a container
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-liveness-http-request
+##
+livenessProbe:
+  ## Initial delay seconds for livenessProbe
+  initialDelaySeconds: 30
+  ## How often (in seconds) to perform the probe
+  periodSeconds: 10
+  ## Number of seconds after which the probe times out
+  timeoutSeconds: 1
+  ## Minimum consecutive successes for the probe to be considered successful
+  ## after having failed.
+  successThreshold: 1
+  ## Treat the container as unhealthy and triggers a restart for that specific
+  ## container after 'failureThreshold' probes have failed
+  failureThreshold: 3
+  ## Grace time prior to the container being forcibly terminated when marked for
+  ## deletion or restarted.
+  terminationGracePeriodSeconds: 30

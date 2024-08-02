@@ -1,0 +1,39 @@
+# Copyright Cognigy GmbH. All Rights Reserved.
+
+## values-prod.yaml: This is custom values files that you can
+## configure quickly to get started for a produciton environment.
+
+## This is a YAML-formatted file.
+
+## State the number of replicas for Marketplace deployment
+##
+replicaCount: 3
+## imagePullSecret: State the image pull secret name
+##
+image:
+  imagePullSecret: cognigy-registry-token
+
+## Ingress: If ingress is not required to deploy then you can set
+## "ingress.enabled" to false. By default it is always enabled.
+##
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  host: marketplace
+  tls:
+    enabled: true
+    crt: |
+      -----BEGIN CERTIFICATE-----
+      -----END CERTIFICATE-----
+    key: |
+      -----BEGIN PRIVATE KEY-----
+      -----END PRIVATE KEY-----
+## resources: Set container requests and limits for different resources like CPU or memory (essential for production workloads)
+##
+resources:
+  requests:
+    cpu: 200m
+    memory: 200M
+  limits:
+    cpu: 400m
+    memory: 300M
