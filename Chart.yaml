@@ -23,4 +23,4 @@ name: cognigy-marketplace
 sources:
   - https://github.com/Cognigy/cognigy-marketplace-helm-chart
 type: application
-version: "1.23.0-alpha.3"
+version: "1.23.0-rc1"
