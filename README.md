@@ -47,10 +47,10 @@ To deploy a new Cognigy.AI Marketplace setup, create a separate file with Helm r
 
 2. Make a copy of `values_prod.yaml` into a new file and name it accordingly. This custom values file is referred to as `YOUR_VALUES_FILE.yaml` later in this document.
 3. **Do not make** a copy of default `values.yaml` file as it contains hardcoded docker images references for required services, and thus they need to be changed manually during upgrades. However, some variables from default `values.yaml` file can be added into the `YOUR_VALUES_FILE.yaml` later on for customization.
-4. Create a dedicated namespace to deploy Cognigy.AI Marketplace using `kubectl` utility using below command:
+4. Create a dedicated namespace to deploy Cognigy.AI Marketplace using `kubectl` utility using below command (replace '`TARGET_NAMESPACE`' with your own, e.g. 'marketplace'):
 
     ```bash
-    kubectl create namespace marketplace
+    kubectl create namespace TARGET_NAMESPACE
     ```
 
    - This namespace is referred to as `TARGET_NAMESPACE` later in this document.
@@ -61,7 +61,7 @@ To deploy a new Cognigy.AI Marketplace setup, create a separate file with Helm r
     kubectl create secret docker-registry cognigy-registry-token \
     --docker-server=cognigy.azurecr.io \
     --docker-username=<your-username> \
-    --docker-password=<your-password> -n marketplace
+    --docker-password=<your-password> -n TARGET_NAMESPACE
     ```
 
    - **Note:** Make sure to replace `<your-username>` and `<your-password>` with your own credentials.
@@ -105,7 +105,7 @@ Follow the below instructions to install the chart:
         ```bash
         # installing helm chart
         helm upgrade --install marketplace \
-            --namespace marketplace --create-namespace \
+            --namespace TARGET_NAMESPACE --create-namespace \
             --version HELM_CHART_VERSION \
             --values YOUR_VALUES_FILE.yaml \
             oci://cognigy.azurecr.io/helm/marketplace-server-backend
@@ -115,7 +115,7 @@ Follow the below instructions to install the chart:
 
         ```bash
         helm upgrade --install marketplace \
-            --namespace marketplace --create-namespace \
+            --namespace TARGET_NAMESPACE --create-namespace \
             --version HELM_CHART_VERSION \
             --values YOUR_VALUES_FILE.yaml .
         ```
@@ -123,14 +123,13 @@ Follow the below instructions to install the chart:
 3. Verify that all pods are in a ready state (wait for 2-5 minutes before executing this command):
 
     ```bash
-    # Generic: kubectl get pods --namespace <TARGET_NAMESPACE>
-    kubectl get pods --namespace marketplace
+    kubectl get pods --namespace TARGET_NAMESPACE
 
     # Check ingress status, if enabled
-    kubectl get ingress -n marketplace
+    kubectl get ingress --namespace TARGET_NAMESPACE
     ```
 
-It's expected that all pods managed by the marketplace deployment are in '*Running*' state, along with one active service.
+It's expected that all pods managed by the marketplace deployment are in '*Running*' state, along with one active service in the `TARGET_NAMESPACE`.
 
 ---
 
@@ -141,7 +140,7 @@ To upgrade Cognigy.AI Marketplace release a newer version, upgrade the existing 
 ```bash
 # upgrading helm chart to newer version
 helm upgrade --install marketplace \
-    --namespace marketplace --create-namespace \
+    --namespace TARGET_NAMESPACE --create-namespace \
     --version HELM_CHART_VERSION \
     --values YOUR_VALUES_FILE.yaml \
     oci://cognigy.azurecr.io/helm/marketplace-server-backend
@@ -151,7 +150,7 @@ The same can be achieved by downloading the new chart files, unzipping the files
 
 ```bash
 helm upgrade --install marketplace \
-    --namespace marketplace --create-namespace \
+    --namespace TARGET_NAMESPACE --create-namespace \
     --version HELM_CHART_VERSION \
     --values YOUR_VALUES_FILE.yaml .
 ```
@@ -169,7 +168,7 @@ Default resources for Cognigy.AI Marketplace microservices specified in `values.
 To uninstall a Cognigy.AI Marketplace helm release, execute the following:
 
 ```bash
-helm uninstall --namespace marketplace marketplace
+helm uninstall --namespace TARGET_NAMESPACE marketplace
 ```
 
 ---
