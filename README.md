@@ -17,14 +17,15 @@ This Helm chart installs a Cognigy.AI Marketplace deployment on a [Kubernetes](h
 ---
 
 ## Prerequisites
-
-- Kubernetes Cluster `v1.19` - `v1.29` running on either of the following platforms:
+1. Kubernetes Cluster running on either of the following platforms:
   - AWS EKS ([Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/))
   - Azure AKS ([Azure Kubernetes Service](https://azure.microsoft.com/en-us/products/kubernetes-service))
-  - "Generic" on-premises or [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) (GKE). **Note:** Running Cognigy.AI Marketplace on-premises will require additional manual steps; it is recommend to use public clouds (AWS or Azure) instead.
-- [kubectl](https://kubernetes.io/docs/reference/kubectl/) utility connected to the target Kubernetes cluster. See install instructions [here](https://kubernetes.io/docs/tasks/tools/#kubectl).
-- [Helm](https://helm.sh/) `v3.9.0` - `v3.12.3`. See install instructions [here](https://helm.sh/docs/intro/install/).
-- (Optional) [git](https://git-scm.com/) binary to clone repository.
+  - "Generic" on-premises or [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine)
+
+**NOTE:** Running Cognigy.AI Marketplace on-premises will require additional manual steps; it is recommended to use public clouds (AWS or Azure) instead.
+2. `kubectl` and `helm` utilities connected to the Kubernetes cluster in administrative mode.
+3. Kubernetes, kubectl and Helm versions as specified in [Version Compatibility Matrix](https://docs.cognigy.com/ai/installation/version-compatibility-matrix/).
+4. (Optional) [git](https://git-scm.com/) binary to clone repository.
 
 ---
 
