@@ -16,7 +16,7 @@ replicaCount: 3
 ##
 image:
   repository: cognigy.azurecr.io/marketplace-server-backend
-  tag: "148237"
+  tag: "194900"
   pullPolicy: IfNotPresent
   imagePullSecret: cognigy-registry-token
 
