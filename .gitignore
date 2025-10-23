@@ -29,3 +29,4 @@ values-custom.yaml
 Chart.lock
 
 .history
+values-local.yaml
