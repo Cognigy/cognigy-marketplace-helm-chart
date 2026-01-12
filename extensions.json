@@ -319,8 +319,8 @@
     {
       "name": "confluence",
       "label": "Confluence",
-      "version": "5.0.1",
-      "downloadUrl": "https://github.com/Cognigy/Extensions/releases/download/confluence501/confluence.tar.gz",
+      "version": "5.0.2",
+      "downloadUrl": "https://github.com/Cognigy/Extensions/releases/download/confluence502/confluence-5.0.2.tar.gz",
       "infoUrl": "https://github.com/Cognigy/Extensions/tree/master/extensions/confluence",
       "description": "Integrates with the Atlassian's Confluence.",
       "longDescription": "Confluence is a popular collaboration tool that allows teams to work together by writing knowledge articles, how-to's and other guides. By using Confluence in conjunction with Cognigy.AI, it is possible to create intelligent bots that can search through your Confluence knowledge base and give detailed instructions.",
@@ -396,8 +396,8 @@
     {
       "name": "diffbot",
       "label": "Diffbot",
-      "version": "1.0.1",
-      "downloadUrl": "https://github.com/Cognigy/Extensions/releases/download/diffbot101/diffbot.tar.gz",
+      "version": "1.0.2",
+      "downloadUrl": "https://github.com/Cognigy/Extensions/releases/download/diffbot102/diffbot-1.0.2.tar.gz",
       "infoUrl": "https://github.com/Cognigy/Extensions/tree/master/extensions/diffbot",
       "description": "Integrates with the Diffbot API",
       "longDescription": "Diffbot provides a powerful API for crawling and importing the content of websites into your Knowledge Base.",
