@@ -396,8 +396,8 @@
     {
       "name": "diffbot",
       "label": "Diffbot",
-      "version": "2.0.0",
-      "downloadUrl": "https://github.com/Cognigy/Extensions/releases/download/diffbot200/diffbot-2.0.0.tar.gz",
+      "version": "2.0.1",
+      "downloadUrl": "https://github.com/Cognigy/Extensions/releases/download/diffbot201/diffbot-2.0.1.tar.gz",
       "infoUrl": "https://github.com/Cognigy/Extensions/tree/master/extensions/diffbot",
       "description": "Integrates with the Diffbot API (Only compatible with Cognigy.AI v2026.5.0+).",
       "longDescription": "Diffbot provides a powerful API for crawling and importing the content of websites into your Knowledge Base.",
