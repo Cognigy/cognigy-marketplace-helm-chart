@@ -4,7 +4,7 @@
     {
       "name": "zendesk",
       "label": "Zendesk",
-      "version": "4.5.1",
+      "version": "4.5.0",
       "downloadUrl": "https://github.com/Cognigy/Extensions/releases/download/zendesk451/zendesk.tar.gz",
       "description": "Integrates Cognigy.AI with Zendesk Support, Chat, and Talk",
       "longDescription": "Zendesk develops and markets software for customer service, sales, and other customer interactions. This integration exposes several functions that enables the virtual agent to maintain support tickets, request callbacks in Talk or handover a Webchat conversation to Zendesk Chat.",
@@ -78,7 +78,7 @@
     {
       "name": "twilio",
       "label": "Twilio",
-      "version": "4.0.1",
+      "version": "4.0.0",
       "downloadUrl": "https://github.com/Cognigy/Extensions/releases/download/twilio401/twilio.tar.gz",
       "infoUrl": "https://github.com/Cognigy/Extensions/tree/master/extensions/twilio",
       "description": "Integrates Cognigy.AI with Twilio",
@@ -2178,7 +2178,7 @@
     {
       "name": "intento-mt-hub",
       "label": "Intento Translator",
-      "version": "4.0.0",
+      "version": "1.0.0",
       "downloadUrl": "https://github.com/Cognigy/Extensions/releases/download/intento-mt-hub400/intento-mt-hub.tar.gz",
       "infoUrl": "https://github.com/Cognigy/Extensions/tree/master/extensions/intento",
       "description": "Intento Enterprise Language Hub",
